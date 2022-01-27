@@ -36,8 +36,7 @@ static VALUE
 optimized_escape_html(VALUE str)
 {
     VALUE vbuf;
-    typedef char escape_buf[HTML_ESCAPE_MAX_LEN];
-    char *buf = *ALLOCV_N(escape_buf, vbuf, RSTRING_LEN(str));
+    char *buf = ALLOCV_N(char, vbuf, RSTRING_LEN(str) * HTML_ESCAPE_MAX_LEN);
     const char *cstr = RSTRING_PTR(str);
     const char *end = cstr + RSTRING_LEN(str);
 

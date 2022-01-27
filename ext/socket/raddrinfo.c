@@ -1788,21 +1788,10 @@ addrinfo_mload(VALUE self, VALUE ary)
         INIT_SOCKADDR_UN(&uaddr, sizeof(struct sockaddr_un));
 
         StringValue(v);
-#ifdef __FreeBSD_kernel__
-       /* sys/un.h defines struct sockaddr_un as:
-          char sun_path[104];
-          char __sun_user_compat[4];
-       */
-        if (sizeof(uaddr.sun_path) + 4 < (size_t)RSTRING_LEN(v))
-            rb_raise(rb_eSocket,
-                "too long AF_UNIX path (%"PRIuSIZE" bytes given but %"PRIuSIZE" bytes max)",
-                (size_t)RSTRING_LEN(v), sizeof(uaddr.sun_path) + 4);
-#else
         if (sizeof(uaddr.sun_path) < (size_t)RSTRING_LEN(v))
             rb_raise(rb_eSocket,
                 "too long AF_UNIX path (%"PRIuSIZE" bytes given but %"PRIuSIZE" bytes max)",
                 (size_t)RSTRING_LEN(v), sizeof(uaddr.sun_path));
-#endif
         memcpy(uaddr.sun_path, RSTRING_PTR(v), RSTRING_LEN(v));
         len = (socklen_t)sizeof(uaddr);
         memcpy(&ss, &uaddr, len);
@@ -2446,21 +2435,10 @@ addrinfo_unix_path(VALUE self)
     if (n < 0)
         rb_raise(rb_eSocket, "too short AF_UNIX address: %"PRIuSIZE" bytes given for minimum %"PRIuSIZE" bytes.",
                  (size_t)rai->sockaddr_len, offsetof(struct sockaddr_un, sun_path));
-#ifdef __FreeBSD_kernel__
-       /* sys/un.h defines struct sockaddr_un as:
-          char sun_path[104];
-          char __sun_user_compat[4];
-       */
-    if ((long)sizeof(addr->sun_path) + 4 < n)
-        rb_raise(rb_eSocket,
-            "too long AF_UNIX path (%"PRIuSIZE" bytes given but %"PRIuSIZE" bytes max)",
-            (size_t)n, sizeof(addr->sun_path) + 4);
-#else
     if ((long)sizeof(addr->sun_path) < n)
         rb_raise(rb_eSocket,
             "too long AF_UNIX path (%"PRIuSIZE" bytes given but %"PRIuSIZE" bytes max)",
             (size_t)n, sizeof(addr->sun_path));
-#endif
     return rb_str_new(addr->sun_path, n);
 }
 #endif

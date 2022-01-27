@@ -226,9 +226,9 @@ module WEBrick
         raise HTTPStatus::BadRequest, "bad URI `#{@unparsed_uri}'."
       end
 
-      if /\Aclose\z/io =~ self["connection"]
+      if /close/io =~ self["connection"]
         @keep_alive = false
-      elsif /\Akeep-alive\z/io =~ self["connection"]
+      elsif /keep-alive/io =~ self["connection"]
         @keep_alive = true
       elsif @http_version < "1.1"
         @keep_alive = false
@@ -503,7 +503,7 @@ module WEBrick
       return unless socket
       if tc = self['transfer-encoding']
         case tc
-        when /\Achunked\z/io then read_chunked(socket, block)
+        when /chunked/io then read_chunked(socket, block)
         else raise HTTPStatus::NotImplemented, "Transfer-Encoding: #{tc}."
         end
       elsif self['content-length'] || @remaining_size

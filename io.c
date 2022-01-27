@@ -1753,11 +1753,7 @@ io_writev(int argc, VALUE *argv, VALUE io)
 
     for (i = 0; i < argc; i += cnt) {
 #ifdef HAVE_WRITEV
-        if ((fptr->mode & (FMODE_SYNC|FMODE_TTY))
-# ifdef IOV_MAX
-               && ((cnt = argc - i) < IOV_MAX)
-# endif
-               ) {
+	if ((fptr->mode & (FMODE_SYNC|FMODE_TTY)) && iovcnt_ok(cnt = argc - i)) {
 	    n = io_fwritev(cnt, &argv[i], fptr);
 	}
 	else
