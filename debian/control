@@ -1,0 +1,150 @@
+Source: ruby2.7
+Section: ruby
+Priority: optional
+Maintainer: Ubuntu Developers <ubuntu-devel-discuss@lists.ubuntu.com>
+XSBC-Original-Maintainer: Debian Ruby Team <pkg-ruby-extras-maintainers@lists.alioth.debian.org>
+Uploaders: Antonio Terceiro <terceiro@debian.org>,
+           Chris Hofstaedtler <zeha@debian.org>,
+           Lucas Kanashiro <kanashiro@debian.org>
+Build-Depends: bison,
+               chrpath,
+               coreutils (>= 7.5),
+               debhelper (>= 12~),
+               file,
+               libffi-dev,
+               libgdbm-compat-dev,
+               libgdbm-dev,
+               libgmp-dev,
+               libncurses5-dev,
+               libncursesw5-dev,
+               libreadline6-dev,
+               libssl-dev,
+               libyaml-dev,
+               netbase,
+               openssl,
+               procps,
+               ruby:native <cross>,
+               rubygems-integration (>= 1.6),
+               systemtap-sdt-dev [linux-any],
+               tzdata,
+               zlib1g-dev
+Standards-Version: 4.5.0
+Homepage: https://www.ruby-lang.org/
+Vcs-Git: https://salsa.debian.org/ruby-team/ruby.git
+Vcs-Browser: https://salsa.debian.org/ruby-team/ruby
+
+Package: ruby2.7
+Multi-Arch: allowed
+Architecture: any
+Depends: rubygems-integration (>= 1.8),
+         ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: fonts-lato,
+            libjs-jquery
+Description: Interpreter of object-oriented scripting language Ruby
+ Ruby is the interpreted scripting language for quick and easy
+ object-oriented programming.  It has many features to process text
+ files and to do system management tasks (as in perl).  It is simple,
+ straight-forward, and extensible.
+ .
+ In the name of this package, `2.7' indicates the Ruby library compatibility
+ version. This package currently provides the `2.7.x' branch of Ruby.
+
+Package: libruby2.7
+Section: libs
+Multi-Arch: same
+Architecture: any
+Depends: rake (>= 10.4.2),
+         ruby-did-you-mean (>= 1.0),
+         ruby-minitest (>= 5.4),
+         ruby-net-telnet (>= 0.1.1),
+         ruby-test-unit (>= 3.0.8~),
+         ruby-xmlrpc (>= 0.3.0~),
+         ${misc:Depends},
+         ${shlibs:Depends}
+Provides: ruby-benchmark (= 0.1.0),
+          ruby-bigdecimal (= 2.0.0),
+          ruby-cgi (= 0.1.0),
+          ruby-csv (= 3.1.2),
+          ruby-date (= 3.0.0),
+          ruby-dbm (= 1.1.0),
+          ruby-delegate (= 0.1.0),
+          ruby-did-you-mean (= 1.4.0),
+          ruby-etc (= 1.1.0),
+          ruby-fcntl (= 1.0.0),
+          ruby-fiddle (= 1.0.0),
+          ruby-fileutils (= 1.4.1),
+          ruby-forwardable (= 1.3.1),
+          ruby-gdbm (= 2.1.0),
+          ruby-getoptlong (= 0.1.0),
+          ruby-io-console (= 0.5.3),
+          ruby-ipaddr (= 1.2.2),
+          ruby-irb (= 1.2.1),
+          ruby-json (= 2.3.0),
+          ruby-logger (= 1.4.2),
+          ruby-matrix (= 0.2.0),
+          ruby-mutex-m (= 0.1.0),
+          ruby-net-pop (= 0.1.0),
+          ruby-net-smtp (= 0.1.0),
+          ruby-observer (= 0.1.0),
+          ruby-open3 (= 0.1.0),
+          ruby-openssl (= 2.1.2),
+          ruby-ostruct (= 0.2.0),
+          ruby-prime (= 0.1.1),
+          ruby-pstore (= 0.1.0),
+          ruby-psych (= 3.1.0),
+          ruby-racc (= 1.4.16),
+          ruby-rdoc (= 6.2.1),
+          ruby-readline (= 0.0.2),
+          ruby-readline-ext (= 0.1.0),
+          ruby-reline (= 0.1.2),
+          ruby-rexml (= 3.2.3),
+          ruby-rss (= 0.2.8),
+          ruby-sdbm (= 1.0.0),
+          ruby-singleton (= 0.1.0),
+          ruby-stringio (= 0.1.0),
+          ruby-strscan (= 1.0.3),
+          ruby-timeout (= 0.1.0),
+          ruby-tracer (= 0.1.0),
+          ruby-uri (= 0.10.0),
+          ruby-webrick (= 1.6.0),
+          ruby-yaml (= 0.1.0),
+          ruby-zlib (= 1.1.0)
+Description: Libraries necessary to run Ruby 2.7
+ Ruby is the interpreted scripting language for quick and easy
+ object-oriented programming.  It has many features to process text
+ files and to do system management tasks (as in perl).  It is simple,
+ straight-forward, and extensible.
+ .
+ This package includes the 'libruby-2.7' library, necessary to run Ruby 2.7.
+ (API version 2.7.0)
+
+Package: ruby2.7-dev
+Multi-Arch: same
+Architecture: any
+Depends: libgmp-dev,
+         libruby2.7 (= ${binary:Version}),
+         ${misc:Depends},
+         ${shlibs:Depends}
+Recommends: ruby2.7-doc
+Description: Header files for compiling extension modules for the Ruby 2.7
+ Ruby is the interpreted scripting language for quick and easy
+ object-oriented programming.  It has many features to process text
+ files and to do system management tasks (as in perl).  It is simple,
+ straight-forward, and extensible.
+ .
+ This package contains the header files and the mkmf library, necessary
+ to make extension library for Ruby 2.7. It is also required to build
+ many gems.
+
+Package: ruby2.7-doc
+Section: doc
+Architecture: all
+Depends: ${misc:Depends}
+Description: Documentation for Ruby 2.7
+ Ruby is the interpreted scripting language for quick and easy
+ object-oriented programming.  It has many features to process text
+ files and to do system management tasks (as in perl).  It is simple,
+ straight-forward, and extensible.
+ .
+ This package contains the autogenerated documentation for Ruby 2.7.
