@@ -1,4 +1,4 @@
-ruby2.7 (2.7.0-5ubuntu1.6) bionic-updates; urgency=medium
+ruby2.7 (2.7.0.0-lliurex) bionic; urgency=medium
 
   * Bionic backport 
 
